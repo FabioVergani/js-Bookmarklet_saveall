@@ -4,12 +4,33 @@
 	if(i!==0){
 		m=w.Array.from(m,e=>(e.naturalWidth!==0 && e.scrollWidth!==0 && e.naturalHeight!==0 && e.scrollHeight!==0)?e.src:(--i,null));
 		if(i!==0){
+			const ne=s=>{
+				let l,i,t=s,m=[t];
+				const f=x=>(l=t.length)>1&&(i=t.lastIndexOf(x))!==-1&&--l!==i;
+				if(f('/')){
+					m[0]=t.substring(0,i);
+					t=t.substring(++i);
+					if(f('.')){
+						m[1]=t.substring(0,i);
+						if(++i!==l){
+							t=t.substring(i);
+							m[2]=t.substring(0,f('?')?i:l)
+						}
+					}
+				};
+				return m//path,name,ext
+			};
 			while(i!==0){
 				let s=m[--i];
-				if(m.indexOf(s)!==-1){
+				m.length=i;
+				if(s.length && m.indexOf(s)===-1){
 					console.log(s)
+					console.dir(ne(s))
+
 				}
 			}
 		}
 	}
 })(window);
+//=======================================================================================================================
+
