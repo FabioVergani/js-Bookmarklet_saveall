@@ -1,0 +1,15 @@
+(w=>{
+	const d=w.document;
+	let m=d.images,i=m.length;
+	if(i!==0){
+		m=w.Array.from(m,e=>(e.naturalWidth!==0 && e.scrollWidth!==0 && e.naturalHeight!==0 && e.scrollHeight!==0)?e.src:(--i,null));
+		if(i!==0){
+			while(i!==0){
+				let s=m[--i];
+				if(m.indexOf(s)!==-1){
+					console.log(s)
+				}
+			}
+		}
+	}
+})(window);
