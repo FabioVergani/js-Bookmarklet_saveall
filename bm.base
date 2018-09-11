@@ -1,0 +1,38 @@
+(w=>{
+	(w.BookMarkletId||(w.BookMarkletId=(w=>{
+		const reset=o=>{opened=null},done=o=>{allowed=true},once=(w,f,i=0)=>{let e=w.document;if(e.readyState!=='complete'){const s=['load','DOMContentLoaded'][i];w.addEventListener(s,e=o=>{w.removeEventListener(s,e);f(o)})}else{f({target:e})}};
+		let opened,allowed=true;
+		return w=>{
+			if(allowed){
+				allowed=false;
+				once(w,o=>{
+					const d=o.target;
+					let m=[...d.images],i=m.length;
+					if(i!==0){
+						/*
+						while(i!==0){
+							const e=m[--i],w=e.naturalWidth,h=e.naturalHeight;
+							if(w!==0 && h!==0){
+								//...
+							}
+						};
+						*/
+						i=opened;
+						if(i && i.closed!==true){
+							//const b=i.document.body;b.replaceWith(b.cloneNode(false));
+							done()
+						}else{
+							once(i=opened=w.open(),o=>{
+								//DOMContentLoaded!
+								done()
+							},1);
+							i.addEventListener('beforeunload',reset);
+						}
+					}
+				}else{
+					allowed=true
+				}
+			})
+		}
+	}})(w)))(w)
+})(window);
